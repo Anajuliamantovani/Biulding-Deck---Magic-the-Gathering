@@ -10,13 +10,18 @@ app.use(cors());
 
 const SCRYFALL_BASE_URL = 'https://api.scryfall.com';
 
-let myFavoriteCards = [];
-let nextId = 1;
-/**
- * @route   GET /search-card
- * @desc    Busca cartas na API Scryfall
- * @query   ?name=nomedacarta
- */
+let myFavoriteCards = [
+    {
+        id: 1,
+        nome: 'Jurubebinha',
+        custoMana: '{G}{1}{U}',
+        tipo: 'Criatura Lendária - Caos estaurado',
+        descricao: 'Quando Jurubebinha entra no campo de batalha ela começa virada. Se ela for desvirada no mesmo turno de invocação, ela entra no modo caos ganhando +3/+3',
+        danoDefesa: '10/5'
+    }
+];
+let nextId = 2;
+
 app.get('/search-card', async (req, res) => {
     const cardName = req.query.name;
 
@@ -31,11 +36,11 @@ app.get('/search-card', async (req, res) => {
             }
         });
 
-        // MUDANÇA 3: A resposta agora é uma LISTA. Pegamos o primeiro item.
+       
         if (response.data && response.data.data && response.data.data.length > 0) {
-            const card = response.data.data[0]; // Pega o primeiro card da lista
+            const card = response.data.data[0];
             
-            // O resto do código para mapear o cardInfo é o MESMO
+           
             const cardInfo = {
                 scryfallId: card.id,
                 name: card.name,
@@ -50,16 +55,16 @@ app.get('/search-card', async (req, res) => {
             res.json(cardInfo);
 
         } else {
-            // A busca funcionou, mas não retornou nenhum card
+           
             res.status(404).json({ message: 'Nenhuma carta encontrada com esse nome.' });
         }
 
     } catch (error) {
-        // MUDANÇA 4: O Scryfall retorna 404 se a *busca* não encontrar nada
+        
         if (error.response && error.response.status === 404) {
              res.status(404).json({ message: 'Nenhuma carta encontrada com esse nome.' });
         } else {
-            // Outro erro (servidor offline, etc)
+            
             console.error('Erro ao buscar na API Scryfall:', error.response ? error.response.data.details : error.message);
             res.status(500).json({ 
                 message: 'Erro ao conectar com a API externa.' 
@@ -69,16 +74,6 @@ app.get('/search-card', async (req, res) => {
 });
 
 
-// ===============================================
-//  PARTE 2: O NOSSO CRUD (API Local) - ADAPTADO PARA CARTAS
-// ===============================================
-
-// --- CREATE ---
-/**
- * @route   POST /my-cards
- * @desc    Adiciona uma nova carta à lista de favoritos
- * @body    { scryfallId, name, userRating }
- */
 app.post('/my-cards', (req, res) => {
     const { nome, custoMana, tipo, descricao, danoDefesa  } = req.body;
 
@@ -99,20 +94,12 @@ app.post('/my-cards', (req, res) => {
     res.status(201).json(newCard);
 });
 
-// --- READ (Todos) ---
-/**
- * @route   GET /my-cards
- * @desc    Lista todas as cartas favoritas
- */
+
 app.get('/my-cards', (req, res) => {
     res.json(myFavoriteCards);
 });
 
-// --- READ (Específico) ---
-/**
- * @route   GET /my-cards/:id
- * @desc    Mostra uma carta favorita específica
- */
+
 app.get('/my-cards/:id', (req, res) => {
     const cardId = parseInt(req.params.id);
     const card = myFavoriteCards.find(c => c.id === cardId);
@@ -123,12 +110,7 @@ app.get('/my-cards/:id', (req, res) => {
     res.json(card);
 });
 
-// --- UPDATE ---
-/**
- * @route   PUT /my-cards/:id
- * @desc    Atualiza uma carta (ex: a nota do usuário)
- * @body    { name (opcional), userRating (opcional) }
- */
+
 app.put('/my-cards/:id', (req, res) => {
     const cardId = parseInt(req.params.id);
     const cardIndex = myFavoriteCards.findIndex(c => c.id === cardId);
@@ -159,11 +141,7 @@ app.put('/my-cards/:id', (req, res) => {
     res.json(updatedCard);
 });
 
-// --- DELETE ---
-/**
- * @route   DELETE /my-cards/:id
- * @desc    Remove uma carta da lista de favoritos
- */
+
 app.delete('/my-cards/:id', (req, res) => {
     const cardId = parseInt(req.params.id);
     const cardIndex = myFavoriteCards.findIndex(c => c.id === cardId);
@@ -178,7 +156,6 @@ app.delete('/my-cards/:id', (req, res) => {
 });
 
 
-// --- 6. Iniciar o Servidor ---
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
     console.log('API Scryfall configurada para /search-card');

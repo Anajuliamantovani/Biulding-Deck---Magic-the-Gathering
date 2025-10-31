@@ -1,22 +1,17 @@
-/* style.css */
-
-/* --- Configuração Global e Fundo --- */
 body {
-    /* Fundo gradiente roxo/azul da imagem */
-    background: linear-gradient(135deg, #4b0082, #000033);
+     background-image: url('../images/textura.jpg'); 
     background-attachment: fixed;
     color: #e0e0e0;
     min-height: 100vh;
 }
 
-/* --- Header (Título) --- */
 .deck-builder-header {
     text-align: center;
     padding: 40px 20px 20px 20px;
 }
 .deck-builder-header .magic-icon {
     font-size: 2.5rem;
-    color: #f0e68c; /* Cor dourada para o ícone de varinha */
+    color: #f0e68c;
 }
 .deck-builder-header h1 {
     font-weight: 700;
@@ -28,10 +23,10 @@ body {
     color: #ccc;
 }
 
-/* --- Navegação por Abas (Tabs) --- */
+
 .nav-tabs {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    justify-content: center; /* Centraliza as abas */
+    justify-content: center;
     margin-bottom: 30px;
 }
 
@@ -47,33 +42,31 @@ body {
     margin-bottom: 15px;
 }
 
-/* Estilo da Aba Ativa (como na imagem) */
+
 .nav-tabs .nav-link.active {
     color: #fff;
-    background: rgba(138, 43, 226, 0.6); /* Roxo semi-transparente */
-    border-radius: 50px; /* Formato de pílula */
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+    background: #E42F1A;
+    border-radius: 50px; 
+    box-shadow: 0 0 10px #E42F1A
 }
 
 .nav-tabs .nav-link:hover:not(.active) {
     color: #fff;
 }
 
-/* --- Conteúdo das Abas (Container Roxo) --- */
+
 .tab-content {
     padding-top: 20px;
 }
 
 .tab-pane {
-    /* O container roxo escuro da imagem */
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(138, 43, 226, 0.3);
+    border: 1px solid #E42F1A;
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* --- Estilo da Barra de Busca (Exato da Imagem) --- */
 .search-section h3 {
     font-weight: 600;
     color: #fff;
@@ -82,14 +75,14 @@ body {
 .search-container {
     position: relative;
 }
-/* O input */
+
 #scryfall-name {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
     font-size: 1.1rem;
     padding: 15px 25px;
-    padding-right: 140px; /* Deixa espaço para o botão */
+    padding-right: 140px; 
     border-radius: 50px;
     height: auto;
 }
@@ -98,41 +91,39 @@ body {
 }
 #scryfall-name:focus {
     background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-    border-color: #8a2be2; /* Roxo */
+    box-shadow: 0 0 15px #E42F1A;
+    border-color: #E42F1A;
 }
-/* O botão "Buscar" */
+
 .search-container .btn {
-    position: absolute; /* Coloca o botão dentro da barra */
+    position: absolute; 
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    background: #8a2be2; /* Roxo */
+    background: #E42F1A;
     color: #fff;
     border-radius: 50px;
     padding: 10px 25px;
     font-weight: 600;
     border: none;
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+    box-shadow: 0 0 10px #E42F1A;
     transition: all 0.3s ease;
 }
 .search-container .btn:hover {
-    background: #9932cc; /* Roxo mais escuro */
+    background: #E42F1A;
 }
 
-/* --- Estilo do Resultado da Busca Scryfall --- */
 #scryfall-result {
     margin-top: 30px;
 }
 #scryfall-result h3 {
-    color: #8a2be2;
+    color: #E42F1A
 }
 #scryfall-result img {
-    border-radius: 12px; /* Arredonda a imagem da carta */
+    border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* --- Estilos para o Formulário e Lista (CRUD) --- */
 .form-label {
     font-weight: 500;
     color: #ccc;
@@ -145,8 +136,8 @@ body {
 .form-control:focus {
     background-color: rgba(0, 0, 0, 0.5);
     color: #f8f9fa;
-    border-color: #8a2be2;
-    box-shadow: 0 0 0 0.25rem rgba(138, 43, 226, 0.25);
+    border-color: #E42F1A;
+    box-shadow: 0 0 0 0.25rem #701d14;
 }
 .form-control::placeholder {
     color: #888;
@@ -156,10 +147,9 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .card-title {
-    color: #8a2be2;
+    color: #E42F1A;
 }
 
-/* --- Ícone de Ajuda (?) --- */
 .help-icon {
     position: fixed;
     bottom: 20px;
@@ -179,6 +169,164 @@ body {
     transition: all 0.3s ease;
 }
 .help-icon:hover {
-    background: #8a2be2;
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+    background: #E42F1A;
+    box-shadow: 0 0 15px #E42F1A;
+}
+
+#meu-deck-tab-pane .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.deck-card-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.deck-card-field {
+
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f8f9fa;
+    
+    border-radius: 0.375rem;
+    padding: 15px;
+    
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+.deck-card-title {
+    font-weight: 600;
+    font-size: 1.25rem; 
+    margin-bottom: 15px; 
+    border-bottom: 10px; 
+    padding-bottom: 10px;
+}
+
+.deck-card-content {
+    flex-grow: 1; 
+}
+
+.deck-card-content .card-text strong {
+    color: #adb5bd; 
+}
+
+.deck-card-actions {
+    margin-top: 15px; 
+    text-align: end;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    padding-top: 15px;
+}
+
+.deck-card-actions .btn-success {
+    background-color: #E42F1A;
+    border-color: #E42F1A;
+    box-shadow: 0 0 8px #E42F1A;
+}
+.deck-card-actions .btn-success:hover {
+    background-color: #E42F1A;
+    border-color: #E42F1A;
+}
+.deck-card-actions .btn-danger {
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+}
+.deck-card-actions .btn-danger:hover {
+    background-color: #E42F1A;
+    border-color: #E42F1A;
+}
+
+#criar-tab-pane #btn-save {
+    background-color: #E42F1A; 
+    border-color: #E42F1A;
+    box-shadow: 0 0 8px #E42F1A; 
+    transition: all 0.3s ease;
+}
+
+#criar-tab-pane #btn-save:hover {
+    background-color: #E42F1A; 
+    border-color: #E42F1A;
+}
+
+#meu-deck-tab-pane .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.deck-card-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.deck-card-field {
+
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f8f9fa;
+    
+    border-radius: 0.375rem; 
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+}
+
+.deck-card-title {
+    font-size: 1.25rem; 
+    margin-bottom: 15px; 
+    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    padding-bottom: 10px;
+}
+
+.deck-card-content {
+    flex-grow: 1; 
+}
+
+.deck-card-content .card-text strong {
+    color: #adb5bd; 
+}
+.deck-card-actions {
+    margin-top: 15px; 
+    text-align: end; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    padding-top: 15px;
+}
+
+.deck-card-actions .btn-success {
+    background-color: #de6f1a;
+    border-color: #de6f1a;
+    box-shadow: 0 0 8px #de6f1a;
+}
+.deck-card-actions .btn-success:hover {
+    background-color: #ff7003;
+    border-color: #E42F1A;
+}
+.deck-card-actions .btn-danger {
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+}
+.deck-card-actions .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+#scryfall-result h3 {
+    color: #ffffff !important; 
+    font-weight: 600;
+}
+
+#scryfall-result .btn-primary {
+    background-color: #E42F1A; 
+    border-color: #E42F1A;
+    box-shadow: 0 0 8px #E42F1A; 
+    transition: all 0.3s ease;
+}
+
+#scryfall-result .btn-primary:hover {
+    background-color: #E42F1A; 
+    border-color: #E42F1A;
 }
