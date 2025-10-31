@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic: The Gathering - Deck Builder</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container my-4">
+
+        <header class="deck-builder-header">
+            <div class="magic-icon"><i class="bi bi-magic"></i></div>
+            <h1>Magic: The Gathering - Deck Builder</h1>
+            <p>Busque cartas, crie suas próprias cartas personalizadas e gerencie seu deck</p>
+        </header>
+        
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="buscar-tab" data-bs-toggle="tab" data-bs-target="#buscar-tab-pane" type="button" role="tab" aria-controls="buscar-tab-pane" aria-selected="true">
+                    Buscar Cartas
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="criar-tab" data-bs-toggle="tab" data-bs-target="#criar-tab-pane" type="button" role="tab" aria-controls="criar-tab-pane" aria-selected="false">
+                    Criar Carta
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="meu-deck-tab" data-bs-toggle="tab" data-bs-target="#meu-deck-tab-pane" type="button" role="tab" aria-controls="meu-deck-tab-pane" aria-selected="false">
+                    Meu Deck
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-5" id="myTabContent">
+            
+            <div class="tab-pane fade show active" id="buscar-tab-pane" role="tabpanel" aria-labelledby="buscar-tab" tabindex="1">
+                
+                <section id="scryfall-section" class="search-section">
+                    <h3>Buscar Cartas</h3>
+                    
+                    <div class="search-container mb-3">
+                        <input type="text" id="scryfall-name" class="form-control form-control-lg" placeholder="Digite o nome da carta, tipo ou descrição...">
+                        <button class="btn" type="button" onclick="searchScryfall()">
+                            <i class="bi bi-search"></i> Buscar
+                        </button>
+                    </div>
+                    
+                    <div id="scryfall-error-message" class="alert alert-danger d-none mt-3"></div>
+
+                    <div id="scryfall-result" class="row align-items-start mt-3">
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="tab-pane fade" id="criar-tab-pane" role="tabpanel" aria-labelledby="criar-tab" tabindex="0">
+                
+                <section id="crud-section">
+                    <h3>Adicionar / Editar Carta</h3>
+                    <p>Crie uma carta personalizada ou edite uma existente no seu deck.</p>
+
+                    <form id="crud-form" onsubmit="return false;">
+                        <input type="hidden" id="card-id">
+                        
+                        <div class="mb-3">
+                            <label for="card-nome" class="form-label">Nome da Carta</label>
+                            <input type="text" id="card-nome" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-custo" class="form-label">Custo de Mana</label>
+                            <input type="text" id="card-custo" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-tipo" class="form-label">Tipo</label>
+                            <input type="text" id="card-tipo" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-descricao" class="form-label">Descrição (Texto)</label>
+                            <textarea id="card-descricao" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="card-dano" class="form-label">Dano/Defesa (P/T)</label>
+                            <input type="text" id="card-dano" class="form-control" placeholder="Ex: 2/2 (Opcional)">
+                        </div>
+                        
+                        <button id="btn-save" class="btn btn-primary w-100" onclick="handleSave()"><i class="bi bi-save-fill"></i> Salvar</button>
+                        <button id="btn-cancel" type="button" class="btn btn-secondary w-100 mt-2" onclick="clearForm()">Cancelar Edição</button>
+                    </form>
+                </section>
+
+            </div>
+
+            <div class="tab-pane fade" id="meu-deck-tab-pane" role="tabpanel" aria-labelledby="meu-deck-tab" tabindex="0">
+                
+                <section id="list-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3>Cartas Salvas no Meu Banco</h3>
+                        <button class="btn btn-sm btn-outline-primary" onclick="loadMyCards()"><i class="bi bi-arrow-clockwise"></i> Atualizar</button>
+                    </div>
+
+                    <div id="my-cards-list" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </div> <a href="#" class="help-icon">?</a>
+    
+    <script src="server.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
